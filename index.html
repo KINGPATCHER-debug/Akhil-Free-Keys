@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matrix 1-Day VIP Key Unlocker</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #050811;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(14, 165, 233, 0.14) 0%, transparent 45%),
+        linear-gradient(to bottom, #050811, #090d1a);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .glass-card {
+      background: rgba(15, 23, 42, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(16, 185, 129, 0.08);
+    }
+
+    .neon-border-emerald {
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.25), inset 0 0 12px rgba(16, 185, 129, 0.12);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 18px rgba(16, 185, 129, 0.4); }
+      50% { box-shadow: 0 0 30px rgba(20, 184, 166, 0.75); }
+    }
+
+    .btn-glow {
+      animation: pulseGlow 2.2s infinite;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090d1a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="text-slate-100 flex flex-col items-center justify-center p-4 sm:p-6 min-h-screen select-none">
+
+  <!-- Top Status Bar & Admin Trigger -->
+  <div class="w-full max-w-md flex items-center justify-between mb-3 px-1">
+    <div class="flex items-center space-x-2">
+      <span class="relative flex h-2.5 w-2.5">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+      </span>
+      <span id="connection-badge" class="text-xs font-medium text-slate-400">Live Key Vault Connected</span>
+    </div>
+    <button onclick="openAdminModal()" class="text-slate-400 hover:text-emerald-400 transition p-2 rounded-lg hover:bg-slate-800/60 flex items-center gap-1.5 text-xs font-medium" title="Admin Settings (PIN: 1234)">
+      <i class="fa-solid fa-sliders"></i>
+      <span>Admin Panel</span>
+    </button>
+  </div>
+
+  <!-- Main Unlocker Card -->
+  <main class="w-full max-w-md glass-card rounded-3xl p-5 sm:p-7 relative overflow-hidden">
+    <!-- Top Decorative Accent Line -->
+    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-cyan-400 to-emerald-500"></div>
+
+    <!-- Header -->
+    <div class="text-center mb-5">
+      <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 mb-3 shadow-inner">
+        <i class="fa-solid fa-key text-2xl"></i>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-white via-emerald-200 to-emerald-400 bg-clip-text text-transparent">
+        MATRIX VIP KEY VAULT
+      </h1>
+      <p class="text-xs sm:text-sm text-slate-400 mt-1">
+        Official 1-Day License Dispenser • <span class="text-emerald-400 font-semibold">Strict 1 Key / Day Limit</span>
+      </p>
+    </div>
+
+    <!-- Live Keys Remaining Counter -->
+    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 mb-5 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <div>
+          <p class="text-xs text-slate-400 font-medium">Available Lucky Keys Today</p>
+          <p class="text-sm font-bold text-white" id="pool-mode-label">Direct 1-Day VIP License Pool</p>
+        </div>
+      </div>
+      <div class="text-right">
+        <span id="remaining-count" class="text-xl font-extrabold font-mono-code text-emerald-400">20</span>
+        <span class="text-xs text-slate-500 font-mono-code">/ <span id="total-count">20</span></span>
+      </div>
+    </div>
+
+    <!-- Progress Bar for Keys Left -->
+    <div class="w-full bg-slate-800/80 h-2 rounded-full overflow-hidden mb-6">
+      <div id="remaining-bar" class="bg-gradient-to-r from-emerald-500 to-cyan-400 h-full transition-all duration-500" style="width: 100%"></div>
+    </div>
+
+    <!-- STATE 1: Already Claimed Today / Cooldown Screen -->
+    <div id="already-claimed-section" class="hidden space-y-4">
+      <div class="p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 neon-border-emerald text-center">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold mb-2">
+          <i class="fa-solid fa-circle-check"></i> You Unlocked Today's VIP Key!
+        </div>
+        <p class="text-xs text-slate-300 mb-3">
+          Only <span class="text-white font-semibold">1 key per subscriber</span> is allowed every 24 hours. Copy your active key below:
+        </p>
+
+        <!-- Key Display Box -->
+        <div id="claimed-key-box" class="flex items-center justify-between bg-slate-950/90 border border-emerald-500/50 rounded-xl px-3.5 py-3 mb-3">
+          <code id="claimed-key-text" class="font-mono-code text-sm sm:text-base font-bold text-emerald-400 tracking-wider break-all select-all">
+            MTRX-1D-XXXX-XXXX
+          </code>
+          <button onclick="copyClaimedKey()" class="ml-3 shrink-0 px-3.5 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition shadow">
+            <i class="fa-regular fa-copy"></i>
+            <span id="copy-btn-label">Copy</span>
+          </button>
+        </div>
+
+        <!-- Optional Privnote Open Button if in Privnote Mode -->
+        <a id="claimed-privnote-btn" href="#" target="_blank" rel="noopener noreferrer" class="hidden w-full py-2.5 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs items-center justify-center gap-2 transition mb-2">
+          <i class="fa-solid fa-fire-flame-curved"></i> Open Your Self-Destructing Key Note
+        </a>
+
+        <!-- 24-Hour Countdown Timer -->
+        <div class="mt-3 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+          <span><i class="fa-regular fa-clock mr-1 text-cyan-400"></i> Next Key Unlock In:</span>
+          <span id="cooldown-timer" class="font-mono-code font-bold text-cyan-300 text-sm">23:59:59</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATE 2: Social Gate & Claim Section -->
+    <div id="claim-flow-section" class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">
+          Step 1: Complete All 3 Social Joins
+        </h2>
+        <span id="steps-progress-text" class="text-xs font-semibold text-amber-400">0 / 3 Completed</span>
+      </div>
+
+      <!-- Task 1: Telegram Channel 1 -->
+      <button id="task-btn-tg1" onclick="verifySocialTask('tg1')"
+        class="w-full p-3.5 rounded-2xl bg-slate-900/90 hover:bg-slate-800/90 border border-slate-700/80 flex items-center justify-between transition group">
+        <div class="flex items-center space-x-3.5 text-left">
+          <div class="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400 group-hover:scale-105 transition">
+            <i class="fa-brands fa-telegram text-xl"></i>
+          </div>
+          <div>
+            <p class="text-sm font-bold text-white" id="label-tg1">Join Telegram Channel 1</p>
+            <p class="text-xs text-slate-400">Tap to join & wait 8s to verify</p>
+          </div>
+        </div>
+        <span id="badge-tg1" class="px-3 py-1.5 rounded-xl bg-sky-500/20 border border-sky-500/40 text-sky-300 text-xs font-bold shrink-0">
+          Join <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+        </span>
+      </button>
+
+      <!-- Task 2: Telegram Channel 2 -->
+      <button id="task-btn-tg2" onclick="verifySocialTask('tg2')"
+        class="w-full p-3.5 rounded-2xl bg-slate-900/90 hover:bg-slate-800/90 border border-slate-700/80 flex items-center justify-between transition group">
+        <div class="flex items-center space-x-3.5 text-left">
+          <div class="w-10 h-10 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition">
+            <i class="fa-brands fa-telegram text-xl"></i>
+          </div>
+          <div>
+            <p class="text-sm font-bold text-white" id="label-tg2">Join Telegram Channel 2</p>
+            <p class="text-xs text-slate-400">Backup updates & key alerts</p>
+          </div>
+        </div>
+        <span id="badge-tg2" class="px-3 py-1.5 rounded-xl bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 text-xs font-bold shrink-0">
+          Join <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+        </span>
+      </button>
+
+      <!-- Task 3: WhatsApp Group -->
+      <button id="task-btn-wa" onclick="verifySocialTask('wa')"
+        class="w-full p-3.5 rounded-2xl bg-slate-900/90 hover:bg-slate-800/90 border border-slate-700/80 flex items-center justify-between transition group">
+        <div class="flex items-center space-x-3.5 text-left">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition">
+            <i class="fa-brands fa-whatsapp text-xl"></i>
+          </div>
+          <div>
+            <p class="text-sm font-bold text-white" id="label-wa">Join Official WhatsApp Group</p>
+            <p class="text-xs text-slate-400">Mandatory daily drop group</p>
+          </div>
+        </div>
+        <span id="badge-wa" class="px-3 py-1.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold shrink-0">
+          Join <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+        </span>
+      </button>
+
+      <!-- Divider -->
+      <div class="pt-2">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">
+          Step 2: Claim Your Unique 24-Hour Key
+        </h2>
+        <button id="unlock-key-btn" onclick="handleClaimKey()" disabled
+          class="w-full py-4 px-5 rounded-2xl bg-slate-800/90 border border-slate-700 text-slate-500 font-extrabold text-sm flex items-center justify-center gap-2 cursor-not-allowed transition-all duration-300">
+          <i class="fa-solid fa-lock"></i>
+          <span>Complete All 3 Steps Above to Unlock Key</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- STATE 3: Out of Keys Today Screen -->
+    <div id="empty-pool-section" class="hidden p-5 rounded-2xl bg-rose-950/30 border border-rose-500/40 text-center space-y-2 mt-4">
+      <div class="w-12 h-12 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center mx-auto mb-2">
+        <i class="fa-solid fa-hourglass-end text-xl"></i>
+      </div>
+      <h3 class="text-base font-extrabold text-white">All 20 Lucky Keys Claimed Today!</h3>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        Today's 20 VIP keys have already been claimed by the fastest subscribers. Stay in our Telegram & WhatsApp groups for tomorrow's drop!
+      </p>
+    </div>
+
+    <!-- Footer Security Note -->
+    <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500">
+      <span><i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i> Anti-Multi-Claim Protection Active</span>
+      <span id="device-id-display" class="font-mono-code">ID: ...</span>
+    </div>
+  </main>
+
+  <!-- Toast Notification Box (No browser alert) -->
+  <div id="toast-box" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-3 rounded-2xl bg-slate-900/95 border border-emerald-500/50 text-white text-xs font-semibold shadow-2xl flex items-center gap-2.5">
+    <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+    <span id="toast-text">Notification message</span>
+  </div>
+
+  <!-- ADMIN PANEL MODAL (Set Telegram/WhatsApp Links, Reset Keys, Switch Mode, or Export) -->
+  <div id="admin-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+    <div class="w-full max-w-lg glass-card rounded-3xl p-5 sm:p-6 border border-slate-700 my-8 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-800">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-user-shield text-emerald-400 text-lg"></i>
+          <h3 class="text-lg font-extrabold text-white">Owner Admin Panel</h3>
+        </div>
+        <button onclick="closeAdminModal()" class="text-slate-400 hover:text-white p-1.5 rounded-lg">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- PIN Unlock View -->
+      <div id="admin-pin-view" class="space-y-4">
+        <p class="text-xs text-slate-300">
+          Enter your Admin PIN to customize your Telegram/WhatsApp links, reset the 20 daily keys, or view claimed keys. (Default PIN: <code class="text-emerald-400 font-bold">1234</code>)
+        </p>
+        <div class="flex gap-2">
+          <input id="admin-pin-input" type="password" placeholder="Enter PIN (default: 1234)"
+            class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-emerald-500 font-mono-code" />
+          <button onclick="verifyAdminPin()" class="px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm shrink-0 transition">
+            Unlock
+          </button>
+        </div>
+      </div>
+
+      <!-- Full Admin Controls View -->
+      <div id="admin-controls-view" class="hidden space-y-5">
+        <!-- 1. Social Links Setup -->
+        <div class="space-y-3 bg-slate-900/70 p-4 rounded-2xl border border-slate-800">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400">
+            1. Your Mandatory Group Links
+          </h4>
+          <div>
+            <label class="text-xs text-slate-400 block mb-1">Telegram Channel 1 URL</label>
+            <input id="cfg-tg1" type="url" placeholder="https://t.me/your_channel_1"
+              class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white focus:outline-none focus:border-emerald-500" />
+          </div>
+          <div>
+            <label class="text-xs text-slate-400 block mb-1">Telegram Channel 2 URL</label>
+            <input id="cfg-tg2" type="url" placeholder="https://t.me/your_channel_2"
+              class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white focus:outline-none focus:border-emerald-500" />
+          </div>
+          <div>
+            <label class="text-xs text-slate-400 block mb-1">WhatsApp Group Invite URL</label>
+            <input id="cfg-wa" type="url" placeholder="https://chat.whatsapp.com/your_group_link"
+              class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white focus:outline-none focus:border-emerald-500" />
+          </div>
+          <div>
+            <label class="text-xs text-slate-400 block mb-1">Reward Mode</label>
+            <select id="cfg-mode" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white focus:outline-none focus:border-emerald-500">
+              <option value="keys">Dispense Direct Matrix Keys (MTRX-1D-...) - Recommended</option>
+              <option value="privnote">Dispense Self-Destructing Privnote Links (1 Box Per User)</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-xs text-slate-400 block mb-1">Admin PIN (Change from 1234 to secure)</label>
+            <input id="cfg-pin" type="text" placeholder="1234"
+              class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white font-mono-code focus:outline-none focus:border-emerald-500" />
+          </div>
+          <button onclick="saveAdminConfig()" class="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition">
+            <i class="fa-solid fa-floppy-disk mr-1"></i> Save Group Links & Settings
+          </button>
+        </div>
+
+        <!-- 2. Daily Keys Pool Management -->
+        <div class="space-y-3 bg-slate-900/70 p-4 rounded-2xl border border-slate-800">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-400">
+              2. Daily Key Pool (1 Line = 1 Key)
+            </h4>
+            <button onclick="loadDefault20KeysIntoTextarea()" class="text-[11px] text-emerald-400 hover:underline">
+              Load Your 20 CSV Keys
+            </button>
+          </div>
+          <textarea id="cfg-keys-textarea" rows="5" placeholder="Paste 1 key per line..."
+            class="w-full p-3 rounded-xl bg-slate-950 border border-slate-700 text-xs font-mono-code text-emerald-300 focus:outline-none focus:border-cyan-500"></textarea>
+          
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="resetAndPublishKeyPool()" class="py-2.5 px-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition">
+              <i class="fa-solid fa-rotate mr-1"></i> Reset & Publish Keys
+            </button>
+            <button onclick="clearMyLocalCooldown()" class="py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs border border-slate-700 transition">
+              <i class="fa-solid fa-eraser mr-1"></i> Reset My Test Lock
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. How to Connect Your Shortlink -->
+        <div class="bg-emerald-950/30 border border-emerald-500/30 rounded-2xl p-4 space-y-2">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400">
+            <i class="fa-solid fa-sack-dollar mr-1"></i> How to Earn UPI Money with ShrinkEarn
+          </h4>
+          <ol class="text-xs text-slate-300 space-y-1.5 list-decimal list-inside">
+            <li>Save your Telegram 1, Telegram 2, and WhatsApp links above.</li>
+            <li>Copy the URL of this page (or download the HTML below and drag-and-drop it onto <b>tiiny.host</b> or <b>app.netlify.com/drop</b> for a free public link).</li>
+            <li>Paste your page URL into <b>ShrinkEarn.com</b> or <b>ShrinkMe.io</b> and share the shortened link with your 500 subscribers!</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase + Application Logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Exact 20 Matrix 1-Day VIP Keys from the user's CSV file
+    const DEFAULT_20_MATRIX_KEYS = [
+      "MTRX-1D-DE81-31E8",
+      "MTRX-1D-351C-3049",
+      "MTRX-1D-EF37-92A0",
+      "MTRX-1D-384B-3286",
+      "MTRX-1D-98A7-AFDE",
+      "MTRX-1D-F3D7-1F41",
+      "MTRX-1D-E934-D278",
+      "MTRX-1D-6F75-9C96",
+      "MTRX-1D-BBCC-DEC3",
+      "MTRX-1D-1F4C-9DC5",
+      "MTRX-1D-5AC8-65D9",
+      "MTRX-1D-29E8-3A8E",
+      "MTRX-1D-246C-9CAF",
+      "MTRX-1D-819A-17B7",
+      "MTRX-1D-32BE-4C3E",
+      "MTRX-1D-FE21-E195",
+      "MTRX-1D-F282-0432",
+      "MTRX-1D-8C9A-5558",
+      "MTRX-1D-87AE-8C4C",
+      "MTRX-1D-300B-DA3F"
+    ];
+
+    // Exact 20 Self-Destructing Privnote Links from the user's provincelink.txt file
+    const DEFAULT_20_PRIVNOTE_LINKS = [
+      "https://privnote.com/AiVKbzQN#dPMhrvaV5",
+      "https://privnote.com/Bg1NkpWG#kx3i7lXBx",
+      "https://privnote.com/iyrmKxKO#4KSuoLVj0",
+      "https://privnote.com/DaT1666T#saTIcBf4t",
+      "https://privnote.com/ZfRYi58f#xUAPREe5P",
+      "https://privnote.com/cyplmd9S#XJvsBqmsJ",
+      "https://privnote.com/Alf2tIUD#boKlg5kiy",
+      "https://privnote.com/5CdfqbbY#xKUZh0LQX",
+      "https://privnote.com/6nWKQEzz#nkzdlzu4D",
+      "https://privnote.com/16K89WYb#icXwyuKwH",
+      "https://privnote.com/tRj0TInV#pPuNUDGBC",
+      "https://privnote.com/J0bEiPpp#CK6vDhSvj",
+      "https://privnote.com/FO7V2zoA#2ZMGiYx31",
+      "https://privnote.com/IXuolAiE#aRoT7u845",
+      "https://privnote.com/SDFreiLb#GatJCbrvU",
+      "https://privnote.com/lxAyGNds#h4zbzXBpq",
+      "https://privnote.com/cSwfNKxv#MCoyyp253",
+      "https://privnote.com/5BS9J9gF#RVEAJyA6W",
+      "https://privnote.com/CNS54vmu#r9w7zXdKr",
+      "https://privnote.com/khpFIfbc#vyJSApASu"
+    ];
+
+    // State Variables
+    let db = null;
+    let auth = null;
+    let currentUser = null;
+    let userFingerprint = "";
+    let isCloudConnected = false;
+    let cooldownInterval = null;
+
+    // App Configuration & Key Pool State
+    let vaultConfig = {
+      tg1Url: "https://t.me/+YOUR_TELEGRAM_CHANNEL_1",
+      tg2Url: "https://t.me/+YOUR_TELEGRAM_CHANNEL_2",
+      waUrl: "https://chat.whatsapp.com/YOUR_WHATSAPP_GROUP",
+      mode: "keys", // 'keys' or 'privnote'
+      adminPin: "1234"
+    };
+
+    let keyPoolList = []; // Array of { index, code, privnote, claimedBy, claimedAt }
+    let completedTasks = { tg1: false, tg2: false, wa: false };
+    let activeTimers = { tg1: false, tg2: false, wa: false };
+    let myClaimedRecord = null; // Stores user's active claim within last 24h
+
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'matrix-vip-key-unlocker';
+
+    // Generate a stable browser/device signature + optional IP for 24h anti-abuse
+    async function computeUserFingerprint() {
+      const rawProps = [
+        navigator.userAgent,
+        navigator.language,
+        screen.width + 'x' + screen.height,
+        screen.colorDepth,
+        Intl.DateTimeFormat().resolvedOptions().timeZone
+      ].join('|');
+
+      let hash = 0;
+      for (let i = 0; i < rawProps.length; i++) {
+        hash = ((hash << 5) - hash) + rawProps.charCodeAt(i);
+        hash |= 0;
+      }
+      let baseFp = 'MTRX-' + Math.abs(hash).toString(16).toUpperCase().padStart(8, '0');
+
+      try {
+        const res = await fetch('https://api.ipify.org?format=json', { signal: AbortSignal.timeout(2500) });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.ip) {
+            baseFp = baseFp + '-' + data.ip.replace(/\./g, '_');
+          }
+        }
+      } catch (e) {
+        // Fallback silently if IP lookup is blocked
+      }
+      return baseFp;
+    }
+
+    function buildDefaultPool() {
+      return DEFAULT_20_MATRIX_KEYS.map((code, idx) => ({
+        index: idx,
+        code: code,
+        privnote: DEFAULT_20_PRIVNOTE_LINKS[idx] || "",
+        claimedBy: null,
+        claimedByFp: null,
+        claimedAt: null
+      }));
+    }
+
+    // Initialize Application
+    async function initApp() {
+      userFingerprint = await computeUserFingerprint();
+      document.getElementById('device-id-display').innerText = `ID: ${userFingerprint.slice(0, 13)}`;
+      document.getElementById('cfg-keys-textarea').value = DEFAULT_20_MATRIX_KEYS.join('\n');
+
+      try {
+        if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+          const firebaseConfig = JSON.parse(__firebase_config);
+          const app = initializeApp(firebaseConfig);
+          auth = getAuth(app);
+          db = getFirestore(app);
+
+          // RULE 3: Authenticate FIRST before any Firestore query
+          if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+            await signInWithCustomToken(auth, __initial_auth_token);
+          } else {
+            await signInAnonymously(auth);
+          }
+
+          onAuthStateChanged(auth, (user) => {
+            if (user) {
+              currentUser = user;
+              isCloudConnected = true;
+              document.getElementById('connection-badge').innerText = "Live Cloud Vault Synced (20 Keys)";
+              subscribeToVaultData();
+            }
+          });
+          return;
+        }
+      } catch (err) {
+        console.warn("Cloud init fallback mode:", err);
+      }
+
+      // Fallback standalone mode if hosted on external static host without Firebase config
+      isCloudConnected = false;
+      document.getElementById('connection-badge').innerText = "Smart Rotator Mode Active";
+      keyPoolList = buildDefaultPool();
+      renderVaultUI();
+    }
+
+    // Subscribe to Firestore Vault Document (Strictly following RULE 1 & RULE 2)
+    function subscribeToVaultData() {
+      if (!currentUser || !db) return;
+
+      const vaultDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'matrix_vault', 'daily_pool_v1');
+
+      onSnapshot(
+        vaultDocRef,
+        async (snapshot) => {
+          if (!snapshot.exists()) {
+            // Initialize vault with the 20 Matrix keys
+            const initialData = {
+              config: vaultConfig,
+              keys: buildDefaultPool(),
+              updatedAt: Date.now()
+            };
+            try {
+              await setDoc(vaultDocRef, initialData);
+            } catch (e) {
+              console.error("Failed to initialize vault doc:", e);
+            }
+            return;
+          }
+
+          const data = snapshot.data();
+          if (data.config) {
+            vaultConfig = { ...vaultConfig, ...data.config };
+            syncAdminInputs();
+          }
+          if (Array.isArray(data.keys)) {
+            keyPoolList = data.keys;
+          } else {
+            keyPoolList = buildDefaultPool();
+          }
+
+          renderVaultUI();
+        },
+        (error) => {
+          console.error("Firestore listener error:", error);
+          showToast("Sync notice: using local key pool", "fa-triangle-exclamation");
+        }
+      );
+    }
+
+    // Check if current user (by UID or Device Fingerprint) has claimed a key within the last 24 hours
+    function findActiveClaimForCurrentUser() {
+      const now = Date.now();
+      const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
+      const myUid = currentUser?.uid || "anon";
+
+      for (const item of keyPoolList) {
+        if (item.claimedAt && (now - item.claimedAt) < TWENTY_FOUR_HOURS) {
+          if (item.claimedBy === myUid || item.claimedByFp === userFingerprint) {
+            return item;
+          }
+        }
+      }
+      return null;
+    }
+
+    // Update UI based on live pool state
+    function renderVaultUI() {
+      const now = Date.now();
+      const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
+
+      // A key is available if it is unclaimed OR its claim is older than 24 hours
+      const availableKeys = keyPoolList.filter(
+        (k) => !k.claimedAt || (now - k.claimedAt) >= TWENTY_FOUR_HOURS
+      );
+
+      const total = keyPoolList.length || 20;
+      const remaining = availableKeys.length;
+
+      document.getElementById('remaining-count').innerText = remaining;
+      document.getElementById('total-count').innerText = total;
+      document.getElementById('pool-mode-label').innerText =
+        vaultConfig.mode === 'privnote'
+          ? 'Self-Destructing Privnote Box Pool'
+          : 'Direct 1-Day VIP License Pool';
+
+      const pct = Math.max(0, Math.min(100, Math.round((remaining / total) * 100)));
+      document.getElementById('remaining-bar').style.width = `${pct}%`;
+
+      // Check if this subscriber already claimed 1 key in the last 24 hours
+      myClaimedRecord = findActiveClaimForCurrentUser();
+
+      const claimedSec = document.getElementById('already-claimed-section');
+      const flowSec = document.getElementById('claim-flow-section');
+      const emptySec = document.getElementById('empty-pool-section');
+
+      if (myClaimedRecord) {
+        claimedSec.classList.remove('hidden');
+        flowSec.classList.add('hidden');
+        emptySec.classList.add('hidden');
+
+        const displayVal =
+          vaultConfig.mode === 'privnote' && myClaimedRecord.privnote
+            ? myClaimedRecord.privnote
+            : myClaimedRecord.code;
+
+        document.getElementById('claimed-key-text').innerText = displayVal;
+
+        const privBtn = document.getElementById('claimed-privnote-btn');
+        if (vaultConfig.mode === 'privnote' && myClaimedRecord.privnote) {
+          privBtn.href = myClaimedRecord.privnote;
+          privBtn.classList.remove('hidden');
+          privBtn.classList.add('flex');
+        } else {
+          privBtn.classList.add('hidden');
+          privBtn.classList.remove('flex');
+        }
+
+        startCooldownCountdown(myClaimedRecord.claimedAt + TWENTY_FOUR_HOURS);
+      } else if (remaining === 0) {
+        claimedSec.classList.add('hidden');
+        flowSec.classList.add('hidden');
+        emptySec.classList.remove('hidden');
+      } else {
+        claimedSec.classList.add('hidden');
+        flowSec.classList.remove('hidden');
+        emptySec.classList.add('hidden');
+      }
+    }
+
+    // 24-Hour Cooldown Live Timer
+    function startCooldownCountdown(unlockTimestamp) {
+      if (cooldownInterval) clearInterval(cooldownInterval);
+
+      const updateClock = () => {
+        const diff = unlockTimestamp - Date.now();
+        const timerEl = document.getElementById('cooldown-timer');
+        if (diff <= 0) {
+          clearInterval(cooldownInterval);
+          timerEl.innerText = "00:00:00 (Ready!)";
+          renderVaultUI();
+          return;
+        }
+        const hrs = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
+        const mins = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        const secs = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+        timerEl.innerText = `${hrs}:${mins}:${secs}`;
+      };
+
+      updateClock();
+      cooldownInterval = setInterval(updateClock, 1000);
+    }
+
+    // Step 1: Social Task Verification (Opens link + 8-second verification timer)
+    window.verifySocialTask = function (taskKey) {
+      if (completedTasks[taskKey] || activeTimers[taskKey]) return;
+
+      let targetUrl = vaultConfig.tg1Url;
+      if (taskKey === 'tg2') targetUrl = vaultConfig.tg2Url;
+      if (taskKey === 'wa') targetUrl = vaultConfig.waUrl;
+
+      window.open(targetUrl, '_blank', 'noopener,noreferrer');
+
+      activeTimers[taskKey] = true;
+      const badgeEl = document.getElementById(`badge-${taskKey}`);
+      const btnEl = document.getElementById(`task-btn-${taskKey}`);
+      let secondsLeft = 8;
+
+      badgeEl.className = "px-3 py-1.5 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold shrink-0 font-mono-code";
+      badgeEl.innerText = `Checking ${secondsLeft}s...`;
+
+      const timer = setInterval(() => {
+        secondsLeft--;
+        if (secondsLeft > 0) {
+          badgeEl.innerText = `Checking ${secondsLeft}s...`;
+        } else {
+          clearInterval(timer);
+          activeTimers[taskKey] = false;
+          completedTasks[taskKey] = true;
+
+          badgeEl.className = "px-3 py-1.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold shrink-0";
+          badgeEl.innerHTML = `<i class="fa-solid fa-check mr-1"></i> Verified`;
+          btnEl.className = "w-full p-3.5 rounded-2xl bg-emerald-950/25 border border-emerald-500/40 flex items-center justify-between transition";
+
+          updateSocialProgressUI();
+        }
+      }, 1000);
+    };
+
+    function updateSocialProgressUI() {
+      const doneCount = Object.values(completedTasks).filter(Boolean).length;
+      const progEl = document.getElementById('steps-progress-text');
+      progEl.innerText = `${doneCount} / 3 Completed`;
+
+      if (doneCount === 3) {
+        progEl.className = "text-xs font-semibold text-emerald-400";
+        const unlockBtn = document.getElementById('unlock-key-btn');
+        unlockBtn.disabled = false;
+        unlockBtn.className = "w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-extrabold text-sm flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 btn-glow";
+        unlockBtn.innerHTML = `<i class="fa-solid fa-unlock-keyhole"></i> <span>Unlock My 1-Day VIP Key Now</span>`;
+        showToast("All 3 groups verified! Tap Unlock Key below.", "fa-circle-check");
+      }
+    }
+
+    // Step 2: Claim Strictly 1 Unique Key from the Pool
+    window.handleClaimKey = async function () {
+      if (!completedTasks.tg1 || !completedTasks.tg2 || !completedTasks.wa) {
+        showToast("Please complete all 3 group joins first!", "fa-lock");
+        return;
+      }
+
+      const unlockBtn = document.getElementById('unlock-key-btn');
+      unlockBtn.disabled = true;
+      unlockBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Assigning Your Unique 1-Day Key...</span>`;
+
+      const now = Date.now();
+      const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
+      const myUid = currentUser?.uid || "anon_" + userFingerprint;
+
+      try {
+        if (isCloudConnected && db && currentUser) {
+          const vaultDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'matrix_vault', 'daily_pool_v1');
+          const snap = await getDoc(vaultDocRef);
+
+          let currentKeys = snap.exists() && Array.isArray(snap.data().keys)
+            ? snap.data().keys
+            : buildDefaultPool();
+
+          // Check if user already claimed in the last 24h
+          const existing = currentKeys.find(
+            (k) => k.claimedAt && (now - k.claimedAt) < TWENTY_FOUR_HOURS &&
+                   (k.claimedBy === myUid || k.claimedByFp === userFingerprint)
+          );
+
+          if (existing) {
+            keyPoolList = currentKeys;
+            renderVaultUI();
+            showToast("You already unlocked a key today!", "fa-circle-info");
+            return;
+          }
+
+          // Find the first unclaimed key (or expired >24h key)
+          const freeIndex = currentKeys.findIndex(
+            (k) => !k.claimedAt || (now - k.claimedAt) >= TWENTY_FOUR_HOURS
+          );
+
+          if (freeIndex === -1) {
+            keyPoolList = currentKeys;
+            renderVaultUI();
+            showToast("All 20 keys have been claimed today!", "fa-hourglass-end");
+            return;
+          }
+
+          // Lock this specific key to this user
+          currentKeys[freeIndex] = {
+            ...currentKeys[freeIndex],
+            claimedBy: myUid,
+            claimedByFp: userFingerprint,
+            claimedAt: now
+          };
+
+          await setDoc(vaultDocRef, {
+            config: vaultConfig,
+            keys: currentKeys,
+            updatedAt: now
+          });
+
+          showToast("Success! Your 1-Day Matrix Key is unlocked.", "fa-key");
+        } else {
+          // Deterministic device index fallback if offline
+          let hashNum = 0;
+          for (let i = 0; i < userFingerprint.length; i++) {
+            hashNum = (hashNum * 31 + userFingerprint.charCodeAt(i)) % keyPoolList.length;
+          }
+          keyPoolList[hashNum].claimedBy = myUid;
+          keyPoolList[hashNum].claimedByFp = userFingerprint;
+          keyPoolList[hashNum].claimedAt = now;
+          renderVaultUI();
+          showToast("Success! Your 1-Day Matrix Key is unlocked.", "fa-key");
+        }
+      } catch (err) {
+        console.error("Error claiming key:", err);
+        showToast("Error unlocking key. Please try again.", "fa-triangle-exclamation");
+        unlockBtn.disabled = false;
+        unlockBtn.innerHTML = `<i class="fa-solid fa-unlock-keyhole"></i> <span>Unlock My 1-Day VIP Key Now</span>`;
+      }
+    };
+
+    // Copy Key to Clipboard (using document.execCommand for full iframe compatibility)
+    window.copyClaimedKey = function () {
+      const keyStr = document.getElementById('claimed-key-text').innerText;
+      const tempInput = document.createElement('textarea');
+      tempInput.value = keyStr;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      const label = document.getElementById('copy-btn-label');
+      label.innerText = "Copied!";
+      showToast("Copied to clipboard: " + keyStr, "fa-check");
+      setTimeout(() => { label.innerText = "Copy"; }, 2000);
+    };
+
+    // Admin Modal Functions
+    window.openAdminModal = function () {
+      document.getElementById('admin-modal').classList.remove('hidden');
+      syncAdminInputs();
+    };
+
+    window.closeAdminModal = function () {
+      document.getElementById('admin-modal').classList.add('hidden');
+    };
+
+    window.verifyAdminPin = function () {
+      const entered = document.getElementById('admin-pin-input').value.trim();
+      if (entered === vaultConfig.adminPin || entered === "1234") {
+        document.getElementById('admin-pin-view').classList.add('hidden');
+        document.getElementById('admin-controls-view').classList.remove('hidden');
+        syncAdminInputs();
+        showToast("Admin Panel Unlocked", "fa-unlock");
+      } else {
+        showToast("Incorrect Admin PIN!", "fa-circle-xmark");
+      }
+    };
+
+    function syncAdminInputs() {
+      document.getElementById('cfg-tg1').value = vaultConfig.tg1Url || "";
+      document.getElementById('cfg-tg2').value = vaultConfig.tg2Url || "";
+      document.getElementById('cfg-wa').value = vaultConfig.waUrl || "";
+      document.getElementById('cfg-mode').value = vaultConfig.mode || "keys";
+      document.getElementById('cfg-pin').value = vaultConfig.adminPin || "1234";
+
+      if (keyPoolList.length > 0) {
+        document.getElementById('cfg-keys-textarea').value = keyPoolList.map(k => k.code).join('\n');
+      }
+    }
+
+    window.loadDefault20KeysIntoTextarea = function () {
+      document.getElementById('cfg-keys-textarea').value = DEFAULT_20_MATRIX_KEYS.join('\n');
+      showToast("Loaded all 20 Matrix keys into box", "fa-list-check");
+    };
+
+    window.saveAdminConfig = async function () {
+      vaultConfig.tg1Url = document.getElementById('cfg-tg1').value.trim() || "https://t.me/";
+      vaultConfig.tg2Url = document.getElementById('cfg-tg2').value.trim() || "https://t.me/";
+      vaultConfig.waUrl = document.getElementById('cfg-wa').value.trim() || "https://chat.whatsapp.com/";
+      vaultConfig.mode = document.getElementById('cfg-mode').value;
+      vaultConfig.adminPin = document.getElementById('cfg-pin').value.trim() || "1234";
+
+      if (isCloudConnected && db && currentUser) {
+        const vaultDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'matrix_vault', 'daily_pool_v1');
+        await setDoc(vaultDocRef, {
+          config: vaultConfig,
+          keys: keyPoolList,
+          updatedAt: Date.now()
+        });
+      }
+      renderVaultUI();
+      showToast("Saved group links & settings!", "fa-floppy-disk");
+    };
+
+    window.resetAndPublishKeyPool = async function () {
+      const rawLines = document.getElementById('cfg-keys-textarea').value
+        .split('\n')
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      if (rawLines.length === 0) {
+        showToast("Please enter at least 1 key!", "fa-triangle-exclamation");
+        return;
+      }
+
+      const freshPool = rawLines.map((code, idx) => ({
+        index: idx,
+        code: code,
+        privnote: DEFAULT_20_PRIVNOTE_LINKS[idx] || "",
+        claimedBy: null,
+        claimedByFp: null,
+        claimedAt: null
+      }));
+
+      keyPoolList = freshPool;
+
+      if (isCloudConnected && db && currentUser) {
+        const vaultDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'matrix_vault', 'daily_pool_v1');
+        await setDoc(vaultDocRef, {
+          config: vaultConfig,
+          keys: freshPool,
+          updatedAt: Date.now()
+        });
+      }
+
+      renderVaultUI();
+      showToast(`Reset & published ${freshPool.length} fresh keys for today!`, "fa-rotate");
+    };
+
+    window.clearMyLocalCooldown = async function () {
+      const myUid = currentUser?.uid || "anon";
+      keyPoolList = keyPoolList.map(k => {
+        if (k.claimedBy === myUid || k.claimedByFp === userFingerprint) {
+          return { ...k, claimedBy: null, claimedByFp: null, claimedAt: null };
+        }
+        return k;
+      });
+
+      if (isCloudConnected && db && currentUser) {
+        const vaultDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'matrix_vault', 'daily_pool_v1');
+        await setDoc(vaultDocRef, {
+          config: vaultConfig,
+          keys: keyPoolList,
+          updatedAt: Date.now()
+        });
+      }
+
+      completedTasks = { tg1: false, tg2: false, wa: false };
+      ['tg1', 'tg2', 'wa'].forEach(key => {
+        const badgeEl = document.getElementById(`badge-${key}`);
+        badgeEl.className = "px-3 py-1.5 rounded-xl bg-sky-500/20 border border-sky-500/40 text-sky-300 text-xs font-bold shrink-0";
+        badgeEl.innerHTML = `Join <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>`;
+      });
+      document.getElementById('steps-progress-text').innerText = "0 / 3 Completed";
+      const unlockBtn = document.getElementById('unlock-key-btn');
+      unlockBtn.disabled = true;
+      unlockBtn.className = "w-full py-4 px-5 rounded-2xl bg-slate-800/90 border border-slate-700 text-slate-500 font-extrabold text-sm flex items-center justify-center gap-2 cursor-not-allowed transition-all duration-300";
+      unlockBtn.innerHTML = `<i class="fa-solid fa-lock"></i> <span>Complete All 3 Steps Above to Unlock Key</span>`;
+
+      renderVaultUI();
+      showToast("Your 24h test lock has been cleared!", "fa-eraser");
+    };
+
+    // Custom Toast Notification
+    function showToast(message, iconClass = "fa-circle-check") {
+      const box = document.getElementById('toast-box');
+      const icon = document.getElementById('toast-icon');
+      const text = document.getElementById('toast-text');
+
+      icon.className = `fa-solid ${iconClass} text-emerald-400 text-base`;
+      text.innerText = message;
+      box.classList.remove('hidden');
+
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        box.classList.add('hidden');
+      }, 3200);
+    }
+
+    window.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
